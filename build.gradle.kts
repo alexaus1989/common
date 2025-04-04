@@ -1,19 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.4.4"
-    id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.9.20"
     kotlin("plugin.spring") version "1.9.20"
+    id("org.springframework.boot") version "3.4.4"
+    id("io.spring.dependency-management") version "1.1.4"
     id("com.google.protobuf") version "0.9.4"
     id("maven-publish")
 }
 
-extra["springCloudVersion"] = "2024.0.1"
-
-
 group = "traffus.common"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -22,46 +19,35 @@ java {
 
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(21)) // Устанавливаем версию Java для Kotlin
-    }
-}
-
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
 repositories {
     mavenCentral()
 }
-
 dependencies {
-    implementation("org.springframework.boot:spring-boot:3.4.4")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
+
     implementation("com.google.protobuf:protobuf-java:3.25.3")
     implementation("io.grpc:grpc-netty-shaded:1.61.0")
     implementation("io.grpc:grpc-stub:1.61.0")
     implementation("io.grpc:grpc-protobuf:1.61.0")
-    compileOnly("javax.annotation:javax.annotation-api:1.3.2") // ← вот это нужно
+
+    compileOnly("javax.annotation:javax.annotation-api:1.3.2")
     annotationProcessor("javax.annotation:javax.annotation-api:1.3.2")
 
-
-
     implementation("org.modelmapper.extensions:modelmapper-spring:3.1.1")
-
     implementation("com.ibm.icu:icu4j:68.2")
 }
 
 dependencyManagement {
     imports {
         mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.4")
-        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:2024.0.1")
     }
 }
 
@@ -77,14 +63,37 @@ protobuf {
     generateProtoTasks {
         all().forEach {
             it.plugins {
-                create("grpc") // ← ВАЖНО: create, а не id
+                create("grpc")
             }
         }
     }
 }
-sourceSets["main"].java.srcDirs("build/generated/source/proto/main/java")
-sourceSets["main"].java.srcDirs("build/generated/source/proto/main/grpc")
 
+sourceSets["main"].java.srcDirs(
+    "build/generated/source/proto/main/java",
+    "build/generated/source/proto/main/grpc"
+)
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += "-Xjsr305=strict"
+        jvmTarget = "21"
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+
+// ⛔️ Отключаем bootJar, включаем обычный jar для библиотеки
+tasks.getByName<Jar>("jar") {
+    enabled = true
+}
+
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    enabled = false
+}
 
 publishing {
     publications {
@@ -98,16 +107,3 @@ publishing {
         }
     }
 }
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-//, "-Xplugin=$rootDir/libs/lombok.jar"
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "21"
-    }
-}
-
