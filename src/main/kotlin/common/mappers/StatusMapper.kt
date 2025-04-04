@@ -1,10 +1,9 @@
 package common.mappers
 
 import common.enums.Status
-import org.springframework.stereotype.Component
 import traffus.blog.traffus_blog.Status as GrpcStatus // gRPC enum
 
-@Component
+
 class StatusMapper {
 
     fun toGrpc(status: Status?): GrpcStatus {
