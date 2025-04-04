@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+option java_package = "traffus.blog.traffus_blog";
+option java_multiple_files = true;
+
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package blog;
+
+service BlogService {
+  rpc GetPost (GetPostRequest) returns (BlogResponse);
+  rpc GetAllPosts (google.protobuf.Empty) returns (BlogListResponse);
+  rpc GetPostsByCategory (GetPostByCategoryRequest) returns (BlogListResponse);
+  rpc CreatePost (CreateBlogRequest) returns (BlogResponse);
+  rpc UpdatePost (UpdateBlogRequest) returns (BlogResponse);
+}
+
+// Запросы
+message GetPostRequest {
+  string alias = 1;
+}
+
+message GetPostByCategoryRequest {
+  string category = 1;
+}
+
+message UpdateBlogRequest {
+  string uuid = 1;
+  string title = 2;
+  string category = 3;
+  string shortDescription = 4;
+  string description = 5;
+  string text = 6;
+  string img = 7;
+}
+
+message CreateBlogRequest {
+  string title = 1;
+  string category = 2;
+  string shortDescription = 3;
+  string description = 4;
+  string text = 5;
+  string img = 6;
+}
+
+
+//////////////////////////////////////
+// Ответы
+message BlogListResponse {
+  repeated BlogResponse blogs = 1;
+}
+
+message BlogResponse {
+  string uuid = 1;
+  string title = 2;
+  string alias = 3;
+
+  ContentResponse content = 4;
+  BlogImageResponse image = 5;
+
+  int64 created = 6; // ISO string или timestamp как string
+  int64  updated = 7; // ISO string или timestamp как string
+
+  Status status = 8;
+}
+
+message ContentResponse {
+  string uuid = 1;
+  string shortDescription = 2;
+  string description = 3;
+  string text = 4;
+
+  int64  created = 5; // ISO string или timestamp как string
+  int64  updated = 6; // ISO string или timestamp как string
+
+  Status status = 7;
+}
+
+message BlogImageResponse {
+  string uuid = 1;
+
+  string image = 2;
+
+  int64  created = 3; // ISO string или timestamp как string
+  int64  updated = 4; // ISO string или timestamp как string
+
+  Status status = 5;
+}
+
+
+enum Status {
+  ACTIVE = 0;
+  NOT_ACTIVE = 1;
+  DELETED = 2;
+}
