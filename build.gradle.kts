@@ -44,10 +44,13 @@ dependencies {
 
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
-    implementation("com.google.protobuf:protobuf-java:3.19.1")
+    implementation("com.google.protobuf:protobuf-java:3.25.3")
     implementation("io.grpc:grpc-netty-shaded:1.61.0")
     implementation("io.grpc:grpc-stub:1.61.0")
     implementation("io.grpc:grpc-protobuf:1.61.0")
+    compileOnly("javax.annotation:javax.annotation-api:1.3.2") // ← вот это нужно
+    annotationProcessor("javax.annotation:javax.annotation-api:1.3.2")
+
 
 
     implementation("org.modelmapper.extensions:modelmapper-spring:3.1.1")
@@ -55,21 +58,33 @@ dependencies {
     implementation("com.ibm.icu:icu4j:68.2")
 }
 
-protobuf {
-    // Это правильная настройка для плагина Protobuf
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.25.3" // Указываем артефакт protoc
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.4")
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
-    generatedFilesBaseDir = "$projectDir/generated" // Папка для сгенерированных файлов
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir("$projectDir/generated/main/java") // Путь к сгенерированным файлам
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.3"
+    }
+    plugins {
+        create("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.61.0"
+        }
+    }
+    generateProtoTasks {
+        all().forEach {
+            it.plugins {
+                create("grpc") // ← ВАЖНО: create, а не id
+            }
         }
     }
 }
+sourceSets["main"].java.srcDirs("build/generated/source/proto/main/java")
+sourceSets["main"].java.srcDirs("build/generated/source/proto/main/grpc")
+
 
 publishing {
     publications {
@@ -88,6 +103,11 @@ tasks.test {
     useJUnitPlatform()
 }
 
+//, "-Xplugin=$rootDir/libs/lombok.jar"
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "21" // Обновляем на 21
+    kotlinOptions {
+        freeCompilerArgs += "-Xjsr305=strict"
+        jvmTarget = "21"
+    }
 }
+
