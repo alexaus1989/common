@@ -9,8 +9,8 @@ plugins {
     id("maven-publish")
 }
 
-group = "traffus.common"
-version = "0.0.0.2"
+group = "common"
+version = "0.0.0.3"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
