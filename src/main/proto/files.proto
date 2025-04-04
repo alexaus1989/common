@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package files;
+
+option java_multiple_files = true;
+option java_package = "cdp.files.grpc";
+option java_outer_classname = "FilesProto";
+
+// gRPC-сервис
+service FileService {
+  // Метод загрузки изображения
+  rpc UploadImage (ImageUploadRequest) returns (ImageUploadResponse);
+
+  // Метод создания XLSX
+  rpc GenerateXlsx (GenerateXlsxRequest) returns (GenerateXlsxResponse);
+}
+
+// Запрос на загрузку изображения
+message ImageUploadRequest {
+  bytes file = 1; // файл в виде байтов
+  string path = 2;
+}
+
+// Ответ после загрузки изображения
+message ImageUploadResponse {
+  string data = 1;
+  bool success = 2;
+}
+
+// Запрос на генерацию XLSX
+message GenerateXlsxRequest {
+  repeated Row rows = 1;
+  string path = 2;
+}
+
+message Row {
+  repeated string values = 1;
+}
+
+// Ответ после генерации
+message GenerateXlsxResponse {
+  string filePath = 1;
+  bool success = 2;
+}
