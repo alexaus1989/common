@@ -1,15 +1,14 @@
 package common.service
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 import java.nio.charset.StandardCharsets
 
 
-@Service
+@Component
 class ImportFile(
-    @Autowired private val resourceLoader: ResourceLoader,
+    private val resourceLoader: ResourceLoader,
 ) {
 
     fun import( path: String ) : String {
