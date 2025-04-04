@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "common"
-version = "0.0.0.3"
+version = "0.0.0.4"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -99,6 +99,8 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+            // Генерация только jar-файла, без дополнительных суффиксов
+            artifact(tasks.getByName("jar"))
         }
     }
     repositories {
