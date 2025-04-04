@@ -1,4 +1,4 @@
-package traffus.blog.traffus_blog.base.text
+package common.text
 
 import java.util.*
 import com.ibm.icu.text.Transliterator

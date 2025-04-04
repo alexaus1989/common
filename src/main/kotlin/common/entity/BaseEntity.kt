@@ -1,9 +1,9 @@
-package traffus.blog.traffus_blog.base.entity
+package common.entity
 
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
-import traffus.blog.traffus_blog.base.enums.Status
+import common.enums.Status
 import java.io.Serializable
 import java.util.*
 

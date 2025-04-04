@@ -1,4 +1,4 @@
-package traffus.blog.traffus_blog.base.transform
+package common.transform
 
 import org.modelmapper.ModelMapper
 import org.springframework.context.annotation.Bean

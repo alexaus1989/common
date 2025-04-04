@@ -1,4 +1,4 @@
-package traffus.blog.traffus_blog.base.enums
+package common.enums
 
 enum class TypeDTO {
     DETAIL,

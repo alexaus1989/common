@@ -1,4 +1,4 @@
-package traffus.blog.traffus_blog.base.dto.response
+package common.dto.response
 
 
 class  ResponseWrapper(

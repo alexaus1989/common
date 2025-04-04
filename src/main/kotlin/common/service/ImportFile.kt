@@ -1,4 +1,4 @@
-package traffus.blog.traffus_blog.base.service
+package common.service
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource

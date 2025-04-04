@@ -1,5 +1,6 @@
 package traffus.blog.traffus_blog.base.entity
 
+import common.entity.BaseEntity
 import jakarta.persistence.Column
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id

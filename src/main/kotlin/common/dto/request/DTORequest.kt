@@ -1,7 +1,7 @@
-package traffus.blog.traffus_blog.base.dto.request
+package common.dto.request
 
-import traffus.blog.traffus_blog.base.enums.SourceRequest
-import traffus.blog.traffus_blog.base.enums.TypeDTO
+import common.enums.SourceRequest
+import common.enums.TypeDTO
 
 open class DTORequest(
     val sourceRequest: SourceRequest? = null,

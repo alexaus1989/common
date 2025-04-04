@@ -1,7 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id("org.springframework.boot") version "3.4.4"
+    id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.9.20"
+    kotlin("plugin.spring") version "1.9.20"
     id("com.google.protobuf") version "0.9.4"
     id("maven-publish")
 }
@@ -17,6 +20,12 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(21)) // Устанавливаем версию Java для Kotlin
+    }
+}
+
 
 configurations {
     compileOnly {
@@ -29,11 +38,21 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot:3.4.4")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
     implementation("com.google.protobuf:protobuf-java:3.19.1")
     implementation("io.grpc:grpc-netty-shaded:1.61.0")
     implementation("io.grpc:grpc-stub:1.61.0")
     implementation("io.grpc:grpc-protobuf:1.61.0")
+
+
+    implementation("org.modelmapper.extensions:modelmapper-spring:3.1.1")
+
+    implementation("com.ibm.icu:icu4j:68.2")
 }
 
 protobuf {
@@ -70,5 +89,5 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "21" // Обновляем на 21
 }
