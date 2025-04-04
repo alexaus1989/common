@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "common"
-version = "0.0.0.5"
+version = "0.0.0.10"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -29,6 +29,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-autoconfigure")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
 
