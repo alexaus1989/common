@@ -15,9 +15,14 @@ service BlogService {
   rpc GetPostsByCategory (GetPostByCategoryRequest) returns (BlogListResponse);
   rpc CreatePost (CreateBlogRequest) returns (BlogResponse);
   rpc UpdatePost (UpdateBlogRequest) returns (BlogResponse);
+  rpc DeletePost (GetPostByUUIDRequest) returns (BlogDeleteResponse);
 }
 
 // Запросы
+message GetPostByUUIDRequest {
+  string alias = 1;
+}
+
 message GetPostRequest {
   string alias = 1;
 }
@@ -38,16 +43,25 @@ message UpdateBlogRequest {
 
 message CreateBlogRequest {
   string title = 1;
-  string category = 2;
-  string shortDescription = 3;
+  repeated FileUpload files = 2;
+  string category = 3;
   string description = 4;
-  string text = 5;
-  string img = 6;
+  string short_description = 5;
+  string text = 6;
 }
 
+message FileUpload {
+  string filename = 1;
+  string content_type = 2;
+  bytes content = 3;
+}
 
 //////////////////////////////////////
 // Ответы
+message BlogDeleteResponse {
+  bool result = 1;
+}
+
 message BlogListResponse {
   repeated BlogResponse blogs = 1;
 }
