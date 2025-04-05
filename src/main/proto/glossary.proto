@@ -6,6 +6,9 @@ option java_multiple_files = true;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
+import "file_upload.proto";
+import "enumses.proto";
+
 
 package glossary;
 
@@ -39,18 +42,13 @@ message UpdateGlossaryRequest {
 
 message CreateGlossaryRequest {
   string title = 1;
-  repeated FileUpload files = 2;
+  repeated common.FileUpload files = 2;
   string category = 3;
   string description = 4;
   string short_description = 5;
   string text = 6;
 }
 
-message FileUpload {
-  string filename = 1;
-  string content_type = 2;
-  bytes content = 3;
-}
 
 //////////////////////////////////////
 // Ответы
@@ -73,7 +71,7 @@ message GlossaryResponse {
   int64 created = 6; // ISO string или timestamp как string
   int64  updated = 7; // ISO string или timestamp как string
 
-  Status status = 8;
+  common.Status status = 8;
 }
 
 message GlossaryContentResponse {
@@ -85,7 +83,7 @@ message GlossaryContentResponse {
   int64  created = 5; // ISO string или timestamp как string
   int64  updated = 6; // ISO string или timestamp как string
 
-  Status status = 7;
+  common.Status status = 7;
 }
 
 message GlossaryImageResponse {
@@ -96,12 +94,6 @@ message GlossaryImageResponse {
   int64  created = 3; // ISO string или timestamp как string
   int64  updated = 4; // ISO string или timestamp как string
 
-  Status status = 5;
+  common.Status status = 5;
 }
 
-
-enum Status {
-  ACTIVE = 0;
-  NOT_ACTIVE = 1;
-  DELETED = 2;
-}

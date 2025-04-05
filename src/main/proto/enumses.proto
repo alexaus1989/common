@@ -1,0 +1,13 @@
+// file_upload.proto
+syntax = "proto3";
+
+package common;
+
+option java_package = "traffus.common";
+option java_multiple_files = true;
+
+enum Status {
+  ACTIVE = 0;
+  NOT_ACTIVE = 1;
+  DELETED = 2;
+}

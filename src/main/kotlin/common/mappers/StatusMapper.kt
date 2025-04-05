@@ -1,7 +1,7 @@
 package common.mappers
 
 import common.enums.Status
-import traffus.blog.traffus_blog.Status as GrpcStatus // gRPC enum
+import traffus.common.Status as GrpcStatus // gRPC enum
 
 
 class StatusMapper {

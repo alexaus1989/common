@@ -74,6 +74,15 @@ sourceSets["main"].java.srcDirs(
     "build/generated/source/proto/main/java",
     "build/generated/source/proto/main/grpc"
 )
+sourceSets {
+    main {
+        proto {
+            // путь к .proto файлам
+            srcDir("main/proto")
+        }
+    }
+}
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
