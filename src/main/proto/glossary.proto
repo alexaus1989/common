@@ -7,31 +7,27 @@ option java_multiple_files = true;
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-package blog;
+package glossary;
 
-service BlogService {
-  rpc GetPost (GetPostRequest) returns (BlogResponse);
-  rpc GetAllPosts (google.protobuf.Empty) returns (BlogListResponse);
-  rpc GetPostsByCategory (GetPostByCategoryRequest) returns (BlogListResponse);
-  rpc CreatePost (CreateBlogRequest) returns (BlogResponse);
-  rpc UpdatePost (UpdateBlogRequest) returns (BlogResponse);
-  rpc DeletePost (GetPostByUUIDRequest) returns (BlogDeleteResponse);
+service GlossaryService {
+  rpc GetPost (GetGlossaryPostRequest) returns (GlossaryResponse);
+  rpc GetAllPosts (google.protobuf.Empty) returns (GlossaryListResponse);
+  rpc CreatePost (CreateGlossaryRequest) returns (GlossaryResponse);
+  rpc UpdatePost (UpdateGlossaryRequest) returns (GlossaryResponse);
+  rpc DeletePost (GetGlossaryPostByUUIDRequest) returns (GlossaryDeleteResponse);
 }
 
 // Запросы
-message GetPostByUUIDRequest {
+message GetGlossaryPostByUUIDRequest {
   string uuid = 1;
 }
 
-message GetPostRequest {
+message GetGlossaryPostRequest {
   string alias = 1;
 }
 
-message GetPostByCategoryRequest {
-  string category = 1;
-}
 
-message UpdateBlogRequest {
+message UpdateGlossaryRequest {
   string uuid = 1;
   string title = 2;
   string category = 3;
@@ -41,7 +37,7 @@ message UpdateBlogRequest {
   string img = 7;
 }
 
-message CreateBlogRequest {
+message CreateGlossaryRequest {
   string title = 1;
   repeated FileUpload files = 2;
   string category = 3;
@@ -58,21 +54,21 @@ message FileUpload {
 
 //////////////////////////////////////
 // Ответы
-message BlogDeleteResponse {
+message GlossaryDeleteResponse {
   bool result = 1;
 }
 
-message BlogListResponse {
-  repeated BlogResponse blogs = 1;
+message GlossaryListResponse {
+  repeated GlossaryResponse blogs = 1;
 }
 
-message BlogResponse {
+message GlossaryResponse {
   string uuid = 1;
   string title = 2;
   string alias = 3;
 
-  ContentResponse content = 4;
-  BlogImageResponse image = 5;
+  GlossaryContentResponse content = 4;
+  GlossaryImageResponse image = 5;
 
   int64 created = 6; // ISO string или timestamp как string
   int64  updated = 7; // ISO string или timestamp как string
@@ -80,7 +76,7 @@ message BlogResponse {
   Status status = 8;
 }
 
-message ContentResponse {
+message GlossaryContentResponse {
   string uuid = 1;
   string shortDescription = 2;
   string description = 3;
@@ -92,7 +88,7 @@ message ContentResponse {
   Status status = 7;
 }
 
-message BlogImageResponse {
+message GlossaryImageResponse {
   string uuid = 1;
 
   string image = 2;
