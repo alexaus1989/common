@@ -14,15 +14,20 @@ package glossary;
 
 service GlossaryService {
   rpc GetPost (GetGlossaryPostRequest) returns (GlossaryResponse);
-  rpc GetAllPosts (google.protobuf.Empty) returns (GlossaryListResponse);
+  rpc GetAllPosts (GetGlossaryPostsByLetterRequest) returns (GlossaryListResponse);
   rpc CreatePost (CreateGlossaryRequest) returns (GlossaryResponse);
   rpc UpdatePost (UpdateGlossaryRequest) returns (GlossaryResponse);
   rpc DeletePost (GetGlossaryPostByUUIDRequest) returns (GlossaryDeleteResponse);
+
 }
 
 // Запросы
 message GetGlossaryPostByUUIDRequest {
   string uuid = 1;
+}
+
+message GetGlossaryPostsByLetterRequest {
+  string letter = 1;
 }
 
 message GetGlossaryPostRequest {
