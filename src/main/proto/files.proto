@@ -1,10 +1,12 @@
 syntax = "proto3";
 
+option java_package = "traffus.files.traffus_files";
+option java_multiple_files = true;
+
 package files;
 
-option java_multiple_files = true;
-option java_package = "cdp.files.grpc";
-option java_outer_classname = "FilesProto";
+
+
 
 // gRPC-сервис
 service FileService {
