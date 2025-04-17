@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+option java_package = "traffus.offers.traffus_offers";
+option java_multiple_files = true;
+
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "file_upload.proto";
+import "enumses.proto";
+
+package blog;
+
+service OfferService {
+  rpc GetOffer (GetOfferRequest) returns (OfferResponse);
+  rpc GetListOffers (google.protobuf.Empty) returns (OfferListResponse);
+  rpc GetOfferByGeo (GetOfferByGeoRequest) returns (OfferListResponse);
+  //rpc CreatePost (CreateBlogRequest) returns (BlogResponse);
+  //rpc UpdatePost (UpdateBlogRequest) returns (BlogResponse);
+  rpc DeleteOffer (GetOfferByUUIDRequest) returns (OfferDeleteResponse);
+}
+
+// Запросы
+message GetOfferByUUIDRequest {
+  string uuid = 1;
+}
+
+message GetOfferRequest {
+  string alias = 1;
+}
+
+message GetOfferByGeoRequest {
+  string category = 1;
+}
+
+
+
+
+//////////////////////////////////////
+// Ответы
+message OfferDeleteResponse {
+  bool result = 1;
+}
+
+message OfferListResponse {
+  repeated OfferResponse offer = 1;
+}
+
+message OfferResponse {
+  string uuid = 1;
+  string externalId = 2;
+  string title = 3;
+
+
+  string logoUrl = 4;
+  string offerUrl = 5;
+
+  double rate = 6;
+
+  double amountFrom = 7;
+  double amountTo = 8;
+
+  int64 termFrom = 9;
+  int64 termTo = 10;
+
+
+  string description = 11;
+
+
+  OfferSeoResponse seo = 12;
+  CompanyDataResponse company = 13;
+  repeated OfferTypeResponse type = 14;
+  repeated OfferGeoResponse geo = 15;
+
+
+  int64 created = 16; // ISO string или timestamp как string
+  int64  updated = 17; // ISO string или timestamp как string
+
+  common.Status status = 18;
+}
+
+message OfferSeoResponse{
+    string uuid = 1;
+    string title = 2;
+    string description = 3;
+    string keywords = 4;
+}
+
+message CompanyDataResponse {
+  string uuid = 1;
+  string slug = 2;
+  string name = 3;
+  string logo = 4;
+
+  string description = 5;
+
+  double rating = 6;
+  string  site = 7;
+  string  email = 8;
+  string  phone = 9;
+}
+
+message OfferTypeResponse {
+  string uuid = 1;
+  int64 externalId = 2;
+  string name = 3;
+  string slug = 4;
+}
+
+message OfferGeoResponse {
+  string uuid = 1;
+  int64 externalId = 2;
+  string name = 3;
+  string slug = 4;
+  string iso = 5;
+}
+

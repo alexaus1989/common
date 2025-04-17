@@ -1,4 +1,4 @@
-package traffus.blog.traffus_blog.base.entity
+package common.entity
 
 import common.entity.BaseEntity
 import jakarta.persistence.Column
