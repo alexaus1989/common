@@ -14,7 +14,7 @@ package blog;
 service BlogService {
   rpc GetPost (GetPostRequest) returns (BlogResponse);
   rpc GetAllPosts (google.protobuf.Empty) returns (BlogListResponse);
-  rpc GetNewPosts (google.protobuf.Empty) returns (BlogListResponse);
+  rpc GetNewPosts (GetNumPostRequest) returns (BlogListResponse);
   rpc GetPostsByCategory (GetPostByCategoryRequest) returns (BlogListResponse);
   rpc CreatePost (CreateBlogRequest) returns (BlogResponse);
   rpc UpdatePost (UpdateBlogRequest) returns (BlogResponse);
@@ -24,6 +24,10 @@ service BlogService {
 // Запросы
 message GetPostByUUIDRequest {
   string uuid = 1;
+}
+
+message GetNumPostRequest {
+  int64 number= 1;
 }
 
 message GetPostRequest {
