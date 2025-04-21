@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 import "file_upload.proto";
 import "enumses.proto";
 
-package blog;
+package offer;
 
 service OfferService {
   rpc GetOffer (GetOfferRequest) returns (OfferResponse);
