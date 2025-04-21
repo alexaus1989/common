@@ -60,8 +60,22 @@ message GlossaryDeleteResponse {
 }
 
 message GlossaryListResponse {
-  repeated GlossaryResponse blogs = 1;
+  repeated GlossaryShortResponse blogs = 1;
 }
+
+message GlossaryShortResponse {
+  string uuid = 1;
+  string title = 2;
+  string alias = 3;
+
+  string shortDescription = 4;
+
+  int64 created = 6; // ISO string или timestamp как string
+  int64  updated = 7; // ISO string или timestamp как string
+
+  common.Status status = 8;
+}
+
 
 message GlossaryResponse {
   string uuid = 1;
