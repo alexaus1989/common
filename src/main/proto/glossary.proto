@@ -67,11 +67,11 @@ message GlossaryShortResponse {
   string uuid = 1;
   string title = 2;
   string alias = 3;
-
-  string shortDescription = 4;
+  string letter = 4;
+  string shortDescription = 5;
 
   int64 created = 6; // ISO string или timestamp как string
-  int64  updated = 7; // ISO string или timestamp как string
+  int64 updated = 7; // ISO string или timestamp как string
 
   common.Status status = 8;
 }
@@ -86,7 +86,7 @@ message GlossaryResponse {
   GlossaryImageResponse image = 5;
 
   int64 created = 6; // ISO string или timestamp как string
-  int64  updated = 7; // ISO string или timestamp как string
+  int64 updated = 7; // ISO string или timestamp как string
 
   common.Status status = 8;
 }
