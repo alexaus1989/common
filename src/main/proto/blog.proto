@@ -36,6 +36,9 @@ message GetPostRequest {
 
 message GetPostByCategoryRequest {
   string category = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  int64 sort = 4;
 }
 
 message UpdateBlogRequest {
