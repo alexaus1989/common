@@ -13,7 +13,7 @@ import "offer.proto";
 package company;
 
 service CompanyService {
-  rpc GetAllCompany(google.protobuf.Empty) returns (CompanyListResponse);
+  rpc GetListCompany(GetCompanyByStatusRequest) returns (CompanyListResponse);
   rpc GetCompany(GetCompanyRequest) returns (CompanyDataResponse);
   rpc DeleteCompany(GetCompanyByUUIDRequest) returns (DeleteCompanyDataResponse);
 }
