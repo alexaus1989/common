@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+option java_package = "traffus.offers.traffus_offers";
+option java_multiple_files = true;
+
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "file_upload.proto";
+import "enumses.proto";
+import "offer.proto";
+
+package company;
+
+service CompanyService {
+  rpc GetAllCompany(google.protobuf.Empty) returns (CompanyListResponse);
+  rpc GetCompany(GetCompanyRequest) returns (CompanyDataResponse);
+  rpc DeleteCompany(GetCompanyByUUIDRequest) returns (DeleteCompanyDataResponse);
+}
+
+// Запросы
+message GetCompanyByUUIDRequest {
+  string uuid = 1;
+}
+
+message GetCompanyByStatusRequest {
+  string uuid = 1;
+}
+
+message GetCompanyRequest {
+  string alias = 1;
+
+}
+
+
+//////////////////////////////////////
+// Ответы
+
+message CompanyListResponse {
+  repeated CompanyDataResponse companies = 1;
+}
+
+
+message CompanyDataResponse {
+  string uuid = 1;
+  string slug = 2;
+  string name = 3;
+  string logo = 4;
+
+  string description = 5;
+
+  double rating = 6;
+  string  site = 7;
+  string  email = 8;
+  string  phone = 9;
+
+  CompanySeoResponse seo = 10;
+
+  repeated OfferShortResponse offers = 12;
+}
+
+message CompanySeoResponse {
+  string uuid = 1;
+  string title = 3;
+  string description = 4;
+  string keyword = 5;
+
+}
+
+message OfferShortResponse {
+  string uuid = 1;
+  string externalId = 2;
+  string title = 3;
+
+  string logoUrl = 4;
+  string offerUrl = 5;
+
+  double rate = 6;
+
+  double amountFrom = 7;
+  double amountTo = 8;
+
+  int64 termFrom = 9;
+  int64 termTo = 10;
+
+  string description = 11;
+
+  repeated offer.OfferTypeResponse type = 14;
+  repeated offer.OfferGeoResponse geo = 15;
+
+  int64 created = 16; // ISO string или timestamp как string
+  int64  updated = 17; // ISO string или timestamp как string
+
+}
+
+message DeleteCompanyDataResponse {
+  bool statusd = 1;
+}

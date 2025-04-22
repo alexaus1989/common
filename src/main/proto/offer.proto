@@ -15,8 +15,6 @@ service OfferService {
   rpc GetOffer (GetOfferRequest) returns (OfferResponse);
   rpc GetListOffers (google.protobuf.Empty) returns (OfferListResponse);
   rpc GetOfferByGeo (GetOfferByGeoRequest) returns (OfferListResponse);
-  rpc GetAllCompany(GetCompanyByStatusRequest) returns (CompanyListResponse);
-  rpc GetCompany(GetCompanyRequest) returns (CompanyDataResponse);
   rpc DeleteOffer (GetOfferByUUIDRequest) returns (OfferDeleteResponse);
 }
 
@@ -24,13 +22,7 @@ service OfferService {
 message GetOfferByUUIDRequest {
   string uuid = 1;
 }
-message GetCompanyByStatusRequest {
-  common.Status status = 1;
-}
 
-message GetCompanyRequest {
-  string alias = 1;
-}
 
 message GetOfferRequest {
   string alias = 1;
@@ -45,9 +37,6 @@ message GetOfferByGeoRequest {
 //////////////////////////////////////
 // Ответы
 
-message CompanyListResponse {
-  repeated CompanyDataResponse companies = 1;
-}
 
 message OfferDeleteResponse {
   bool result = 1;
@@ -79,7 +68,7 @@ message OfferResponse {
 
 
   OfferSeoResponse seo = 12;
-  CompanyDataResponse company = 13;
+  CompanyShortDataResponse company = 13;
   repeated OfferTypeResponse type = 14;
   repeated OfferGeoResponse geo = 15;
 
@@ -97,7 +86,7 @@ message OfferSeoResponse{
     string keywords = 4;
 }
 
-message CompanyDataResponse {
+message CompanyShortDataResponse {
   string uuid = 1;
   string slug = 2;
   string name = 3;
