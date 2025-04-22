@@ -15,14 +15,18 @@ service OfferService {
   rpc GetOffer (GetOfferRequest) returns (OfferResponse);
   rpc GetListOffers (google.protobuf.Empty) returns (OfferListResponse);
   rpc GetOfferByGeo (GetOfferByGeoRequest) returns (OfferListResponse);
-  //rpc CreatePost (CreateBlogRequest) returns (BlogResponse);
-  //rpc UpdatePost (UpdateBlogRequest) returns (BlogResponse);
+  rpc GetAllCompany(google.protobuf.Empty) returns (CompanyListResponse);
+  rpc GetCompany(GetCompanyRequest) returns (CompanyDataResponse);
   rpc DeleteOffer (GetOfferByUUIDRequest) returns (OfferDeleteResponse);
 }
 
 // Запросы
 message GetOfferByUUIDRequest {
   string uuid = 1;
+}
+
+message GetCompanyRequest {
+  string alias = 1;
 }
 
 message GetOfferRequest {
@@ -35,9 +39,13 @@ message GetOfferByGeoRequest {
 
 
 
-
 //////////////////////////////////////
 // Ответы
+
+message CompanyListResponse {
+  repeated CompanyDataResponse companies = 1;
+}
+
 message OfferDeleteResponse {
   bool result = 1;
 }
