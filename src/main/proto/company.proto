@@ -24,7 +24,7 @@ message GetCompanyByUUIDRequest {
 }
 
 message GetCompanyByStatusRequest {
-  string uuid = 1;
+  common.Status status = 1;
 }
 
 message GetCompanyRequest {
