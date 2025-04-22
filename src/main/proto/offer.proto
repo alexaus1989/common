@@ -15,7 +15,7 @@ service OfferService {
   rpc GetOffer (GetOfferRequest) returns (OfferResponse);
   rpc GetListOffers (google.protobuf.Empty) returns (OfferListResponse);
   rpc GetOfferByGeo (GetOfferByGeoRequest) returns (OfferListResponse);
-  rpc GetAllCompany(google.protobuf.Empty) returns (CompanyListResponse);
+  rpc GetAllCompany(GetCompanyByStatusRequest) returns (CompanyListResponse);
   rpc GetCompany(GetCompanyRequest) returns (CompanyDataResponse);
   rpc DeleteOffer (GetOfferByUUIDRequest) returns (OfferDeleteResponse);
 }
@@ -23,6 +23,9 @@ service OfferService {
 // Запросы
 message GetOfferByUUIDRequest {
   string uuid = 1;
+}
+message GetCompanyByStatusRequest {
+  common.Status status = 1;
 }
 
 message GetCompanyRequest {
