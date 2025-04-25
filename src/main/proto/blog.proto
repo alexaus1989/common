@@ -54,12 +54,17 @@ message UpdateBlogRequest {
 message CreateBlogRequest {
   string title = 1;
   repeated common.FileUpload files = 2;
-  string category = 3;
   string description = 4;
   string short_description = 5;
   string text = 6;
+  CreateBlogSeoRequest seo = 7;
 }
 
+message CreateBlogSeoRequest {
+  string title = 1;
+  string description = 4;
+  string keywords = 5;
+}
 
 //////////////////////////////////////
 // Ответы
