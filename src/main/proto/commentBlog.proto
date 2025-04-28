@@ -80,6 +80,7 @@ message BlogCommentResponse {
 }
 
 message CommentBlogVoteResponse {
-  string user = 1; // UUID пользователя, который поставил лайк/дизлайк
-  bool is_like = 2; // true = лайк, false = дизлайк
+  string uuid = 1;
+  string user = 2; // UUID пользователя, который поставил лайк/дизлайк
+  bool is_like = 6; // true = лайк, false = дизлайк
 }
