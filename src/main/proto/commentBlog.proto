@@ -11,8 +11,8 @@ import "enumses.proto";
 package commentBlog;
 
 service BlogCommentService {
-  rpc GeCommentsByPost (GetBlogCommentsByPostRequest) returns (BlogCommentListResponse);
-  rpc GeCommentsByUser (GetBlogCommentsByUserRequest) returns (BlogCommentListResponse);
+  rpc GetCommentsByPost (GetBlogCommentsByPostRequest) returns (BlogCommentListResponse);
+  rpc GetCommentsByUser (GetBlogCommentsByUserRequest) returns (BlogCommentListResponse);
   rpc CreateComment (CreateBlogCommentRequest) returns (CommentBlogResponse);
   rpc UpdateComment (UpdateBlogCommentRequest) returns (CommentBlogResponse);
   rpc DeleteComment (GetBlogCommentByUUIDRequest) returns (BlogCommentDeleteResponse);
