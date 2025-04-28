@@ -50,9 +50,15 @@ message CreateGlossaryRequest {
   string description = 4;
   string shortDescription = 5;
   string text = 6;
+
+  CreateGlossarySeoRequest seo = 7;
 }
 
-
+message CreateGlossarySeoRequest {
+  string title = 1;
+  string description = 4;
+  string keywords = 5;
+}
 //////////////////////////////////////
 // Ответы
 message GlossaryDeleteResponse {
@@ -84,11 +90,12 @@ message GlossaryResponse {
 
   GlossaryContentResponse content = 4;
   GlossaryImageResponse image = 5;
+  GlossarySeoResponse seo = 6;
 
-  int64 created = 6; // ISO string или timestamp как string
-  int64 updated = 7; // ISO string или timestamp как string
+  int64 created = 7; // ISO string или timestamp как string
+  int64 updated = 8; // ISO string или timestamp как string
 
-  common.Status status = 8;
+  common.Status status = 9;
 }
 
 message GlossaryContentResponse {
@@ -114,3 +121,11 @@ message GlossaryImageResponse {
   common.Status status = 5;
 }
 
+
+message GlossarySeoResponse {
+  string uuid = 1;
+
+  string title = 2;
+  string description = 3;
+  string keywords = 4;
+}

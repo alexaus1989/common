@@ -83,7 +83,7 @@ message BlogResponse {
 
   ContentResponse content = 4;
   BlogImageResponse image = 5;
-  CreateBlogSeoResponse seo = 6;
+  BlogSeoResponse seo = 6;
 
   int64 created = 7; // ISO string или timestamp как string
   int64  updated = 8; // ISO string или timestamp как string
@@ -115,7 +115,7 @@ message BlogImageResponse {
 }
 
 
-message CreateBlogSeoResponse {
+message BlogSeoResponse {
   string uuid = 1;
 
   string title = 2;
