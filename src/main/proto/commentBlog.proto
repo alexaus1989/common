@@ -7,15 +7,19 @@ option java_multiple_files = true;
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "enumses.proto";
+import "result.proto";
 
 package commentBlog;
 
 service BlogCommentService {
   rpc GetCommentsByPost (GetBlogCommentsByPostRequest) returns (BlogCommentListResponse);
   rpc GetCommentsByUser (GetBlogCommentsByUserRequest) returns (BlogCommentListResponse);
-  rpc CreateComment (CreateBlogCommentRequest) returns (CommentBlogResponse);
-  rpc UpdateComment (UpdateBlogCommentRequest) returns (CommentBlogResponse);
-  rpc DeleteComment (GetBlogCommentByUUIDRequest) returns (BlogCommentDeleteResponse);
+  rpc CreateBlogComment (CreateBlogCommentRequest) returns (BlogCommentResponse);
+  rpc UpdateComment (UpdateBlogCommentRequest) returns (BlogCommentResponse);
+  rpc DeleteComment (GetBlogCommentByUUIDRequest) returns (common.ResultResponse);
+
+  ///VOTE
+  rpc CreateVoteBlogComment (CreateVoteBlogCommentRequest) returns (common.ResultResponse);
 }
 
 // Запросы
@@ -39,6 +43,12 @@ message CreateBlogCommentRequest {
   string text = 5;
 }
 
+message CreateVoteBlogCommentRequest {
+  string user = 1; // UUID пользователя, который поставил лайк/дизлайк
+  string comment = 2; // UUID пользователя, который поставил лайк/дизлайк
+  bool is_like = 5; // true = лайк, false = дизлайк
+}
+
 message UpdateBlogCommentRequest {
   string uuid = 1;
 
@@ -48,31 +58,28 @@ message UpdateBlogCommentRequest {
 
 //////////////////////////////////////
 // Ответы
-message BlogCommentDeleteResponse {
-  bool result = 1;
-}
 
 message BlogCommentListResponse {
-  repeated CommentBlogResponse comments = 1;
+  repeated BlogCommentResponse comments = 1;
 }
 
-message CommentBlogResponse {
+message BlogCommentResponse {
   string uuid = 1;
   string user = 2;
   string parent = 3; // UUID родительского комментария, если это ответ
 
   string text = 4;
 
-  repeated CommentBlogVote votes = 7;
+  repeated CommentBlogVoteResponse votes = 7;
 
-  repeated CommentBlogResponse replies = 13;
+  repeated BlogCommentResponse replies = 13;
 
   int64  created = 10; // ISO string или timestamp как string
   int64  updated = 11; // ISO string или timestamp как string
   common.Status status = 12;
 }
 
-message CommentBlogVote {
+message CommentBlogVoteResponse {
   string user = 1; // UUID пользователя, который поставил лайк/дизлайк
   bool is_like = 2; // true = лайк, false = дизлайк
 }
