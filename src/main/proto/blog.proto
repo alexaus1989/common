@@ -86,7 +86,7 @@ message BlogResponse {
   BlogImageResponse image = 5;
   BlogSeoResponse seo = 6;
 
-  commentBlog.BlogCommentResponse comments = 7;
+  repeated commentBlog.BlogCommentResponse comments = 7;
 
   int64 created = 10; // ISO string или timestamp как string
   int64  updated = 11; // ISO string или timestamp как string
