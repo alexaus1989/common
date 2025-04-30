@@ -84,3 +84,10 @@ message CommentBlogVoteResponse {
   string user = 2; // UUID пользователя, который поставил лайк/дизлайк
   bool is_like = 6; // true = лайк, false = дизлайк
 }
+/*
+ТАК нельзя ибо нет аватров gateway должен сам обогащать данными при ответе.
+message CommentBlogUserResponse {
+  string avatar = 1;
+  string user = 2;
+  string name = 3;
+}*/

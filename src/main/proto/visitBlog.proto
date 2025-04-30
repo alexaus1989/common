@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option java_package = "traffus.blog.traffus_blog";
+option java_multiple_files = true;
+
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "enumses.proto";
+import "result.proto";
+
+package visitBlog;
+
+service BlogVisitService {
+  rpc CreateBlogVisit (CreateBlogVisitRequest) returns (BlogVisitCreateResponse);
+
+  rpc GetCountBlogVisitByPost (GetBlogVisitsByPostRequest) returns (BlogVisitResponse);
+}
+
+message GetBlogVisitsByPostRequest{
+  string post = 1;
+}
+
+message CreateBlogVisitRequest {
+  string postId = 1;
+  string visitorId = 2;
+  string userId = 3;
+  string fingerprint = 10;
+  string userAgent = 11;
+  string screen = 15;
+  string referrer = 16;
+}
+
+
+//////////////////////////////////////
+// Ответы
+
+message BlogVisitCreateResponse {
+  string postId = 1;
+  string visitorId = 2;
+  string userId = 3;
+  string fingerprint = 10;
+  string userAgent = 11;
+  string screen = 15;
+  string referrer = 16;
+
+  string uuid = 5;
+  int64 created = 6; // ISO string или timestamp как string
+  int64 updated = 7; // ISO string или timestamp как string
+  common.Status status = 8;
+}
+
+message BlogVisitResponse {
+  int32 unicVisit = 1;
+  int32 allVisits = 2;
+}
