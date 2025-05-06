@@ -88,6 +88,9 @@ message BlogResponse {
 
   repeated commentBlog.BlogCommentResponse comments = 7;
 
+  int64 totalVisit = 8;
+  int64 uniqueVisit = 9;
+
   int64 created = 10; // ISO string или timestamp как string
   int64  updated = 11; // ISO string или timestamp как string
 
