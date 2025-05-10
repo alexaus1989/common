@@ -60,6 +60,7 @@ message OfferResponse {
   double amountTo = 17;
   int64 termFrom = 18;
   int64 termTo = 19;
+  string extendedFields = 20;
 
 
   string description = 25;
