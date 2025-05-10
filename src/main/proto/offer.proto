@@ -50,40 +50,38 @@ message OfferResponse {
   string uuid = 1;
   string externalId = 2;
   string title = 3;
+  string alias = 4;
+
+  string logoUrl = 10;
+  string offerUrl = 11;
+
+  double rate = 15;
+  double amountFrom = 16;
+  double amountTo = 17;
+  int64 termFrom = 18;
+  int64 termTo = 19;
 
 
-  string logoUrl = 4;
-  string offerUrl = 5;
-
-  double rate = 6;
-
-  double amountFrom = 7;
-  double amountTo = 8;
-
-  int64 termFrom = 9;
-  int64 termTo = 10;
+  string description = 25;
 
 
-  string description = 11;
+  OfferSeoResponse seo = 26;
+  CompanyShortDataResponse company = 27;
+  repeated OfferTypeResponse type = 28;
+  repeated OfferGeoResponse geo = 29;
 
 
-  OfferSeoResponse seo = 12;
-  CompanyShortDataResponse company = 13;
-  repeated OfferTypeResponse type = 14;
-  repeated OfferGeoResponse geo = 15;
+  int64 created = 35; // ISO string или timestamp как string
+  int64  updated = 36; // ISO string или timestamp как string
 
-
-  int64 created = 16; // ISO string или timestamp как string
-  int64  updated = 17; // ISO string или timestamp как string
-
-  common.Status status = 18;
+  common.Status status = 40;
 }
 
 message OfferSeoResponse{
-    string uuid = 1;
-    string title = 2;
-    string description = 3;
-    string keywords = 4;
+  string uuid = 1;
+  string title = 2;
+  string description = 3;
+  string keywords = 4;
 }
 
 message CompanyShortDataResponse {
