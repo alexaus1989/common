@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option java_package = "traffus.offers.traffus_offers";
+option java_multiple_files = true;
+
+
+
+package offerTypes;
+
+service OfferTypeService {
+  rpc GetOfferTypeByAlias (GetOfferTypeByAliasRequest) returns (OfferTypeResponse);
+  rpc GetOfferTypeByUuid (GetOfferTypeByUUIDRequest) returns (OfferTypeResponse);
+  rpc GetListTypes (GetOfferTypeByRequest) returns (OfferTypesListResponse);
+}
+
+// Запросы
+message GetOfferTypeByRequest {
+  string col = 1;
+}
+
+message GetOfferTypeByUUIDRequest {
+  string uuid = 1;
+}
+
+message GetOfferTypeByAliasRequest {
+  string alias = 1;
+}
+
+
+//////////////////////////////////////
+// Ответы
+
+message OfferTypesListResponse {
+  repeated OfferTypeResponse offers = 1;
+}
+
+message OfferTypeResponse {
+  string uuid = 1;
+  int64 externalId = 2;
+  string name = 3;
+  string slug = 4;
+}
+
+

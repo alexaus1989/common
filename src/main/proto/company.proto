@@ -4,11 +4,10 @@ option java_package = "traffus.offers.traffus_offers";
 option java_multiple_files = true;
 
 
-import "google/protobuf/empty.proto";
-import "google/protobuf/timestamp.proto";
-import "file_upload.proto";
 import "enumses.proto";
 import "offer.proto";
+import "offerType.proto";
+
 
 package company;
 
@@ -85,7 +84,7 @@ message OfferShortResponse {
 
   string description = 11;
 
-  repeated offer.OfferTypeResponse type = 14;
+  repeated offerTypes.OfferTypeResponse type = 14;
   repeated offer.OfferGeoResponse geo = 15;
 
   int64 created = 16; // ISO string или timestamp как string

@@ -5,8 +5,9 @@ option java_multiple_files = true;
 
 
 import "google/protobuf/empty.proto";
-import "google/protobuf/timestamp.proto";
-import "file_upload.proto";
+//import "google/protobuf/timestamp.proto";
+//import "file_upload.proto";
+import "offerType.proto";
 import "enumses.proto";
 
 package offer;
@@ -36,7 +37,6 @@ message GetOfferByGeoRequest {
 
 //////////////////////////////////////
 // Ответы
-
 
 message OfferDeleteResponse {
   bool result = 1;
@@ -68,7 +68,7 @@ message OfferResponse {
 
   OfferSeoResponse seo = 26;
   CompanyShortDataResponse company = 27;
-  repeated OfferTypeResponse type = 28;
+  repeated offerTypes.OfferTypeResponse type = 28;
   repeated OfferGeoResponse geo = 29;
 
 
@@ -99,12 +99,6 @@ message CompanyShortDataResponse {
   string  phone = 9;
 }
 
-message OfferTypeResponse {
-  string uuid = 1;
-  int64 externalId = 2;
-  string name = 3;
-  string slug = 4;
-}
 
 message OfferGeoResponse {
   string uuid = 1;
