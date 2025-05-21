@@ -14,6 +14,7 @@ package company;
 service CompanyService {
   rpc GetListCompany(GetCompanyByStatusRequest) returns (CompanyListResponse);
   rpc GetCompany(GetCompanyRequest) returns (CompanyDataResponse);
+  rpc SetCompanyText(SetCompanyTextRequest) returns (CompanyDataResponse);
   rpc DeleteCompany(GetCompanyByUUIDRequest) returns (DeleteCompanyDataResponse);
 }
 
@@ -22,13 +23,21 @@ message GetCompanyByUUIDRequest {
   string uuid = 1;
 }
 
+message SetCompanyTextRequest {
+  string uuid = 1;
+
+  string text = 5;
+  string seoTitle = 6;
+  string seoDescription = 7;
+  string seoKeywords = 8;
+}
+
 message GetCompanyByStatusRequest {
   common.Status status = 1;
 }
 
 message GetCompanyRequest {
   string alias = 1;
-
 }
 
 
@@ -93,5 +102,5 @@ message OfferShortResponse {
 }
 
 message DeleteCompanyDataResponse {
-  bool statusd = 1;
+  bool status = 1;
 }
